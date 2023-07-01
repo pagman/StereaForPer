@@ -14,30 +14,42 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AdaptiveNavBar(
         screenWidth: MediaQuery.of(context).size.width,
-        title: const Text("Adaptive NavBar"),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              'logo.png',
+              fit: BoxFit.contain,
+              height: 32,
+            ),
+            Container(
+                padding: const EdgeInsets.all(8.0), child: Text('Sterea for Pets'))
+          ],
+
+        ),
         navBarItems: [
           NavBarItem(
             text: "Home",
             onTap: () {
-              Navigator.pushNamed(context, "routeName");
+              Navigator.pushNamed(context, "/");
             },
           ),
           NavBarItem(
             text: "About Us",
             onTap: () {
-              Navigator.pushNamed(context, "routeName");
+              Navigator.pushNamed(context, "/");
             },
           ),
           NavBarItem(
             text: "About Us",
             onTap: () {
-              Navigator.pushNamed(context, "routeName");
+              Navigator.pushNamed(context, "/");
             },
           ),
           NavBarItem(
             text: "About Us",
             onTap: () {
-              Navigator.pushNamed(context, "routeName");
+              Navigator.pushNamed(context, "/");
             },
           ),
         ],
