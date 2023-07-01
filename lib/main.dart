@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
@@ -16,15 +18,18 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: '/',
-        routes: {
-          // When navigating to the "/" route, build the FirstScreen widget.
-          '/': (context) => const HomePage(),
-          // When navigating to the "/second" route, build the SecondScreen widget.
+        primarySwatch: Colors.blue,
+    ),
+    scrollBehavior: MaterialScrollBehavior().copyWith(
+    dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch, PointerDeviceKind.stylus, PointerDeviceKind.unknown}
+    ),
+    initialRoute: '/',
+    routes: {
+    // When navigating to the "/" route, build the FirstScreen widget.
+    '/': (context) => const HomePage(),
+    // When navigating to the "/second" route, build the SecondScreen widget.
 
-        }
+    }
     );
   }
 }
