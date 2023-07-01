@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                           elevation: 6,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          child: Center(//sdfsdf
+                          child: Center(
                             child: Text(
                               "Card ${i + 1}",
                               style: TextStyle(fontSize: 32),
