@@ -18,17 +18,23 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AdaptiveNavBar(
+        backgroundColor: Color(0xff2BD4DA),
         screenWidth: MediaQuery.of(context).size.width,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              'logo.png',
-              fit: BoxFit.contain,
-              height: 32,
+            Container(
+              height: 53,
+              width: 53,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(width: 8, color: Colors.white),
+                borderRadius: BorderRadius.circular(100), //<-- SEE HERE
+              ),
+              child: Image.asset('logo.png'),
             ),
             Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(9.0),
                 child: Text('Sterea for Pets'))
           ],
         ),
@@ -45,22 +51,11 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, "/");
             },
           ),
-          NavBarItem(
-            text: "About Us",
-            onTap: () {
-              Navigator.pushNamed(context, "/");
-            },
-          ),
-          NavBarItem(
-            text: "About Us",
-            onTap: () {
-              Navigator.pushNamed(context, "/");
-            },
-          ),
         ],
       ),
       body: MapBox(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff2BD4DA),
         onPressed: () {
           showDialog(
             context: context,
@@ -73,6 +68,12 @@ class _HomePageState extends State<HomePage> {
                   child: Form(
                     child: Column(
                       children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          color: Colors.grey,
+                          child: Icon(Icons.image),
+                        ),
                         TextFormField(
                           decoration: const InputDecoration(
                             labelText: "Όνομα",
@@ -89,6 +90,12 @@ class _HomePageState extends State<HomePage> {
                           decoration: const InputDecoration(
                             labelText: "Χαρακτηριστικά",
                             icon: Icon(Icons.message),
+                          ),
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Τηλέφωνο",
+                            icon: Icon(Icons.phone_callback),
                           ),
                         ),
                       ],

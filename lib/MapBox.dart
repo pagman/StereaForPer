@@ -35,19 +35,21 @@ class _MapBoxState extends State<MapBox> {
             height: 50,
             point: LatLng(globals.animals[0].lat, globals.animals[0].lon),
             builder: (ctx) => Container(
-                key: Key('blue'), child: Image(image: AssetImage('1.png')))),
+                key: Key('blue'), child: Image(image: AssetImage('1.png')))
+
+        ),
       );
-      for (var x = 0; x < 5; x++) {
+      for (var x = 0; x < globals.animals.length; x++) {
         allMarkers.add(
           Marker(
             width: 50,
               height: 50,
               point: LatLng(
-                doubleInRange(r, 37, 55),
-                doubleInRange(r, -9, 30),
+                globals.animals[x].lat,
+                globals.animals[x].lon
               ),
               builder: (ctx) => Container(
-                  key: Key('blue'), child: Image(image: AssetImage('1.png')))),
+                  key: Key('blue'), child: Image(image: AssetImage(globals.animals[x].image)))),
         );
       }
       setState(() {});
@@ -64,8 +66,8 @@ class _MapBoxState extends State<MapBox> {
           FlutterMap(
             options: MapOptions(
               maxZoom: 18,
-              center: LatLng(38.459831, 23.590091),
-              zoom: 17,
+              center: LatLng(38.462467, 23.607580),
+              zoom: 15,
             ),
             children: [
               TileLayer(
