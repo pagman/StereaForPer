@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'globals.dart' as globals;
 
 class MapBox extends StatefulWidget {
   const MapBox({Key? key}) : super(key: key);
@@ -11,7 +12,8 @@ class MapBox extends StatefulWidget {
 }
 
 class _MapBoxState extends State<MapBox> {
-  int _index = 0;
+
+
   final TextEditingController _searchController = TextEditingController();
 
   double doubleInRange(Random source, num start, num end) =>
@@ -19,26 +21,33 @@ class _MapBoxState extends State<MapBox> {
   List<Marker> allMarkers = [];
   String _mapUrl =
       "https://api.mapbox.com/styles/v1/pagman/{mapStyleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}";
-  String _mapStyle = 'ckzgtk6sq008w14l8xk4i4187';
+  String _mapStyle = 'clagslxf6000r14n4zp7eiw7p';
 
   @override
   void initState() {
     super.initState();
+    //readJson();
     Future.microtask(() {
       final r = Random();
+      allMarkers.add(
+        Marker(
+            width: 50,
+            height: 50,
+            point: LatLng(globals.animals[0].lat, globals.animals[0].lon),
+            builder: (ctx) => Container(
+                key: Key('blue'), child: Image(image: AssetImage('1.png')))),
+      );
       for (var x = 0; x < 5; x++) {
         allMarkers.add(
           Marker(
-            point: LatLng(
-              doubleInRange(r, 37, 55),
-              doubleInRange(r, -9, 30),
-            ),
-            builder: (context) => const Icon(
-              Icons.circle,
-              color: Colors.red,
-              size: 12,
-            ),
-          ),
+            width: 50,
+              height: 50,
+              point: LatLng(
+                doubleInRange(r, 37, 55),
+                doubleInRange(r, -9, 30),
+              ),
+              builder: (ctx) => Container(
+                  key: Key('blue'), child: Image(image: AssetImage('1.png')))),
         );
       }
       setState(() {});
@@ -78,6 +87,8 @@ class _MapBoxState extends State<MapBox> {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey[200],
                     hintText: 'Search...',
                     // Add a clear button to the search bar
                     suffixIcon: IconButton(
@@ -100,28 +111,41 @@ class _MapBoxState extends State<MapBox> {
               ),
               SizedBox(
                 height: 80, // card height
-                child: PageView.builder(
-                  itemCount: 10,
-                  controller: PageController(viewportFraction: 0.2),
-                  onPageChanged: (int index) => setState(() => _index = index),
-                  itemBuilder: (_, i) {
-                    return Transform.scale(
-                      scale: i == _index ? 1 : 0.9,
-                      child: Card(
-                        elevation: 6,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Center(
-                          child: Text(
-                            "Lost ${i + 1}",
-                            style: TextStyle(fontSize: 32),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                child: ListView.builder(
+                    itemCount: globals.animals.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                                  //margin: const EdgeInsets.all(20),
+                                  child: SizedBox(
+                                    width: 250,
+                                    height: 80,
+                                    child: ListTile(
+                                      leading: Image.asset(globals.animals[index].image),
+                                      title: Text(globals.animals[index].name),
+                                      subtitle: Text(globals.animals[index].description),
+                                    ),
+                                  ),
+                                );
+                    }),
               ),
+              // ListView.builder(
+              //     itemCount: animals.length,
+              //     scrollDirection: Axis.horizontal,
+              //     itemBuilder: (context, index) {
+              //       Card(
+              //         //margin: const EdgeInsets.all(20),
+              //         child: SizedBox(
+              //           width: 250,
+              //           height: 100,
+              //           child: ListTile(
+              //             leading: Image.asset('1.png'),
+              //             title: Text(animals[index].name),
+              //             subtitle: Text('This is a simple card in Flutter.'),
+              //           ),
+              //         ),
+              //       );
+              //     }),
             ],
           )
         ],

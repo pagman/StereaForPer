@@ -60,67 +60,54 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: MapBox(),
-      // body: Center(
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: <Widget>[
-      //         Container(
-      //           padding: const EdgeInsets.all(20),
-      //           width: MediaQuery.of(context).size.width * 0.4,
-      //           child: TextField(
-      //             controller: _searchController,
-      //             decoration: InputDecoration(
-      //               hintText: 'Search...',
-      //               // Add a clear button to the search bar
-      //               suffixIcon: IconButton(
-      //                 icon: Icon(Icons.clear),
-      //                 onPressed: () => print('search'),
-      //               ),
-      //               // Add a search icon or button to the search bar
-      //               prefixIcon: IconButton(
-      //                 icon: Icon(Icons.search),
-      //                 onPressed: () {
-      //                   print(_searchController.text);
-      //                   // Perform the search here
-      //                 },
-      //               ),
-      //               border: OutlineInputBorder(
-      //                 borderRadius: BorderRadius.circular(20.0),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //           SizedBox(
-      //             height: 80, // card height
-      //             child: PageView.builder(
-      //               itemCount: 10,
-      //               controller: PageController(viewportFraction: 0.2),
-      //               onPageChanged: (int index) => setState(() => _index = index),
-      //               itemBuilder: (_, i) {
-      //                 return Transform.scale(
-      //                   scale: i == _index ? 1 : 0.9,
-      //                   child: Card(
-      //                     elevation: 6,
-      //                     shape: RoundedRectangleBorder(
-      //                         borderRadius: BorderRadius.circular(20)),
-      //                     child: Center(
-      //                       child: Text(
-      //                         "Card ${i + 1}",
-      //                         style: TextStyle(fontSize: 32),
-      //                       ),
-      //                     ),
-      //                   ),
-      //                 );
-      //               },
-      //             ),
-      //           ),
-      //         MapBox(),
-      //       ],
-      //     ),
-      // ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        tooltip: 'Increment',
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                scrollable: true,
+                title: const Text("Προσθήκη νέου"),
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Όνομα",
+                            icon: Icon(Icons.account_box),
+                          ),
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Περιγραφή",
+                            icon: Icon(Icons.email),
+                          ),
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Χαρακτηριστικά",
+                            icon: Icon(Icons.message),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                actions: [
+                  ElevatedButton(
+                    child: const Text("Προσθήκη"),
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        tooltip: 'Add Animal',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
