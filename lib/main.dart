@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:stereaforpets/municipals.dart';
 
 import 'HomePage.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
     routes: {
     // When navigating to the "/" route, build the FirstScreen widget.
     '/': (context) => const HomePage(),
+      '/second': (context) => const municipal(),
     // When navigating to the "/second" route, build the SecondScreen widget.
 
     }

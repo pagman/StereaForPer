@@ -3,6 +3,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'globals.dart' as globals;
+import 'model/Animals.dart';
 
 class MapBox extends StatefulWidget {
   const MapBox({Key? key}) : super(key: key);
@@ -15,13 +16,14 @@ class _MapBoxState extends State<MapBox> {
 
 
   final TextEditingController _searchController = TextEditingController();
-
+  String _search = "";
   double doubleInRange(Random source, num start, num end) =>
       source.nextDouble() * (end - start) + start;
   List<Marker> allMarkers = [];
   String _mapUrl =
       "https://api.mapbox.com/styles/v1/pagman/{mapStyleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}";
   String _mapStyle = 'clagslxf6000r14n4zp7eiw7p';
+  List<Animal> _filter = [];
 
   @override
   void initState() {
@@ -102,6 +104,7 @@ class _MapBoxState extends State<MapBox> {
                       icon: Icon(Icons.search),
                       onPressed: () {
                         print(_searchController.text);
+                        _search = _searchController.text;
                         // Perform the search here
                       },
                     ),

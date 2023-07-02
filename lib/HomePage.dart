@@ -46,9 +46,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           NavBarItem(
-            text: "About Us",
+            text: "Δήμοι",
             onTap: () {
-              Navigator.pushNamed(context, "/");
+              Navigator.pushNamed(context, "/second");
             },
           ),
         ],
